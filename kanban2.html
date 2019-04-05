@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="kanbanApp">
+<!--IMPLEMENTAMOS LA APLICACION DE ANGULAR CON LA DIRECTIVA NG APP -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"><!-- -->
+    <title>Kanban Board</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="appKanban.js"></script><!-- Agregabamos el JS  al documento html para anexarlo junto con el angulas -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Importamos el enlace de bootstrap-->
+</head>
+
+<body>
+    <div ng-controller="kanbanController as KC">
+        <!--Declaramos el controlador en el div para manipular la vista y el controlador-->
+
+        <form ng-submit="KC.add();">
+            <!--Utilizamoa el KC.add para agregar elementos al arreglo-->
+            <span>Captura de datos</span><br><br>
+            <span>Nombre: </span><input type="text" ng-model="newobj.name">
+            <span>Descripción</span><input type="text" ng-model="newobj.Desc">
+
+            <input type="submit" value="Add">
+            <!--Trae consigo el método submit para el formulario-->
+        </form>
+
+        <!--  <p>{{KC.tasks}}</p>-->
+
+        <!--<p>{{KC.demo}}</p>-->
+        <!--Imprimimos el demo con el binding del doble corchete-->
+        <!--<p ng-bind="demoView">{{}}</p>
+        <!--La etiqueta muestra, salida de datos -->
+        <!-- <input type="text" ng-model="demoView.name">-->
+        <!--Se crea un objeto en el html-->
+        <!--No va al controlador, es declarado hacia la vista-->
+        <!--Salida de datos-->
+        <!--<button ng-click="KC.show()">Mostrar</button><!--Directiva ng-Click-->
+        <br><br>
+        <h1 style="text-align:center;">Kanban Board Leonardo Daniel Ramírez Noroña</h1>
+        <!--Título con nombre centrado para denotar-->
+        <hr>
+        <hr>
+        <div class="row">
+
+            <div class="col-sm-4">
+                <!--Se utiliza el sistema de grid de bootstrap 4.3.1-->
+                <ul style="list-style-type:none">
+                    <h3>To Do</h3>
+                    <li ng-repeat="task in KC.tasks | filter:{status:1}">
+                        <span>{{task.name}}</span> <button ng-click="KC.decrementa(task.index)"> Previous</button>
+                        <button ng-click="KC.incrementa(task.index)"> Next</button>
+                        <!--Se declara un botón para la movilidad de el estado de las tareas ya sea previo o actual-->
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <ul style="list-style-type:none">
+                    <!--Eliminamos el bullet de las listas-->
+                    <h3>Doing</h3>
+                    <li ng-repeat="task in KC.tasks | filter:{status:2}">
+                        <span>{{task.name}}</span>
+                        <!--Se declara un botón para la movilidad de el estado de las tareas ya sea previo o actual-->
+                        <button ng-click="KC.decrementa(task.index)"> Previous</button>
+                        <button ng-click="KC.incrementa(task.index)"> Next</button>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <ul style="list-style-type:none">
+                    <h3>Done</h3>
+                    <li ng-repeat="task in KC.tasks | filter:{status:3}">
+                        <!---->
+                        <span>{{task.name}}</span> <button ng-click="KC.decrementa(task.index)">
+                            Previous</button><button ng-click="KC.incrementa(task.index)"> Next</button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
