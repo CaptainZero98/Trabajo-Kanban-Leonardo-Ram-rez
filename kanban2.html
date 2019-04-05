@@ -51,7 +51,7 @@
                 <ul style="list-style-type:none">
                     <h3>To Do</h3>
                     <li ng-repeat="task in KC.tasks | filter:{status:1}">
-                        <span>{{task.name}}</span> <button ng-click="KC.decrementa(task.index)"> Previous</button>
+                        <span>{{task.name}}</span>
                         <button ng-click="KC.incrementa(task.index)"> Next</button>
                         <!--Se declara un botón para la movilidad de el estado de las tareas ya sea previo o actual-->
                     </li>
@@ -76,8 +76,7 @@
                     <h3>Done</h3>
                     <li ng-repeat="task in KC.tasks | filter:{status:3}">
                         <!---->
-                        <span>{{task.name}}</span> <button ng-click="KC.decrementa(task.index)">
-                            Previous</button><button ng-click="KC.incrementa(task.index)"> Next</button>
+                        <span>{{task.name}}</span>
                     </li>
 
                 </ul>
